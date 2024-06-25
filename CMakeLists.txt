@@ -41,6 +41,7 @@ set(PROTOBUF_FILES
 
 set(MSG_FILES
     msg/vision/DetectionBall.msg
+    msg/comms/SendData.msg
 )
 
 set(ACTION_FILES
