@@ -1,3 +1,1 @@
-RobotData keeper
-RobotData field1
-RobotData field2
+RobotData[] robots
