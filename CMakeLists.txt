@@ -42,6 +42,7 @@ set(PROTOBUF_FILES
 set(MSG_FILES
     msg/vision/DetectionBall.msg
     msg/comms/RobotCmd.msg
+    msg/comms/RobotData.msg
 )
 
 set(ACTION_FILES
