@@ -1,0 +1,2 @@
+RobotGameData[] allies
+RobotGameData[] enemies
