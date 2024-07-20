@@ -48,7 +48,16 @@ set(PROTOBUF_FILES
 )
 
 set(MSG_FILES
+    # ssl vision system msgs
     msg/vision/DetectionBall.msg
+
+    # game controller msgs
+    msg/game_controller/GameEvent.msg
+    msg/game_controller/GameEventProposalGroup.msg
+    msg/game_controller/Referee.msg
+    msg/game_controller/TeamInfo.msg
+
+    # communication module msgs
     msg/comms/RobotCmd.msg
     msg/comms/RobotCmdData.msg
     msg/comms/RobotGameData.msg
