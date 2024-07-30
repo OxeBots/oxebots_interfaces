@@ -20,18 +20,16 @@ set(REQUIRED_PACKAGES
     std_msgs
 )
 
-foreach(pkg ${REQUIRED_PACKAGES})
+foreach(pkg IN LISTS REQUIRED_PACKAGES)
     find_package(${pkg} REQUIRED)
 endforeach()
 
 set(PROTOBUF_FILES
-
     # grSim
     proto/grSim/grSim_Commands.proto
     proto/grSim/grSim_Packet.proto
     proto/grSim/grSim_Replacement.proto
     proto/grSim/grSim_Robotstatus.proto
-    proto/grSim/ssl_gc_common.proto
     proto/grSim/ssl_simulation_config.proto
     proto/grSim/ssl_simulation_control.proto
     proto/grSim/ssl_simulation_error.proto
@@ -41,10 +39,25 @@ set(PROTOBUF_FILES
     proto/grSim/ssl_vision_detection.proto
     proto/grSim/ssl_vision_geometry.proto
     proto/grSim/ssl_vision_wrapper.proto
+
+    # game controller
+    proto/ssl-game-controller/ssl_gc_common.proto
+    proto/ssl-game-controller/ssl_gc_referee_message.proto
+    proto/ssl-game-controller/ssl_gc_game_event.proto
+    proto/ssl-game-controller/ssl_gc_geometry.proto
 )
 
 set(MSG_FILES
+    # ssl vision system msgs
     msg/vision/DetectionBall.msg
+
+    # game controller msgs
+    msg/game_controller/GameEvent.msg
+    msg/game_controller/GameEventProposalGroup.msg
+    msg/game_controller/Referee.msg
+    msg/game_controller/TeamInfo.msg
+
+    # communication module msgs
     msg/comms/RobotCmd.msg
     msg/comms/RobotCmdData.msg
     msg/comms/RobotGameData.msg
@@ -91,7 +104,7 @@ target_include_directories(${PROJECT_NAME}_proto
 target_compile_options(${PROJECT_NAME}_proto PRIVATE -Wno-deprecated-declarations)
 
 ament_export_targets(${PROJECT_NAME}_proto HAS_LIBRARY_TARGET)
-ament_export_dependencies(Protobuf)
+ament_export_dependencies(Protobuf rosidl_default_runtime)
 
 install(
     DIRECTORY ${CMAKE_BINARY_DIR}
@@ -106,11 +119,8 @@ install(TARGETS ${PROJECT_NAME}_proto
     INCLUDES DESTINATION include
 )
 
-ament_export_dependencies(rosidl_default_runtime)
-
 if(BUILD_TESTING)
     find_package(ament_lint_auto REQUIRED)
-    set(ament_cmake_copyright_FOUND TRUE)
     ament_lint_auto_find_test_dependencies()
 endif()
 
