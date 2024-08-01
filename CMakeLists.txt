@@ -56,6 +56,7 @@ set(MSG_FILES
     msg/game_controller/GameEventProposalGroup.msg
     msg/game_controller/Referee.msg
     msg/game_controller/TeamInfo.msg
+    msg/game_controller/Vector2.msg
 
     # communication module msgs
     msg/comms/RobotCmd.msg
