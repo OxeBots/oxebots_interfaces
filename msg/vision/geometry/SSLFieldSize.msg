@@ -1,0 +1,15 @@
+int32 field_length
+int32 field_width
+int32 goal_width
+int32 goal_depth
+int32 boundary_width
+SSLFieldLineSegment[] field_lines
+SSLCircularArc[] field_arcs
+int32 penalty_area_depth
+int32 penalty_area_width
+int32 center_circle_radius
+int32 line_thickness
+int32 goal_center_to_penalty_mark
+int32 goal_height
+float32 ball_radius
+float32 max_robot_radius

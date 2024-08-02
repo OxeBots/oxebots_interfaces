@@ -38,9 +38,14 @@ set(PROTOBUF_FILES
     proto/grSim/ssl_simulation_robot_control.proto
     proto/grSim/ssl_simulation_robot_feedback.proto
     proto/grSim/ssl_simulation_synchronous.proto
-    proto/grSim/ssl_vision_detection.proto
-    proto/grSim/ssl_vision_geometry.proto
-    proto/grSim/ssl_vision_wrapper.proto
+    #proto/grSim/ssl_vision_detection.proto
+    #proto/grSim/ssl_vision_geometry.proto
+    #proto/grSim/ssl_vision_wrapper.proto
+
+    # ssl-vision
+    proto/ssl-vision/messages_robocup_ssl_detection.proto
+    proto/ssl-vision/messages_robocup_ssl_geometry.proto
+    proto/ssl-vision/messages_robocup_ssl_wrapper.proto
 )
 
 set(MSG_FILES
@@ -51,6 +56,18 @@ set(MSG_FILES
     msg/comms/BallPosition.msg
     msg/comms/RobotPosition.msg
     msg/game/GameData.msg
+
+    # geometry msgs
+    msg/vision/geometry/Vector2f.msg
+    msg/vision/geometry/SSLBallModelChipFixedLoss.msg
+    msg/vision/geometry/SSLBallModelStraightTwoPhase.msg
+    msg/vision/geometry/SSLCameraCalibration.msg
+    msg/vision/geometry/SSLCircularArc.msg
+    msg/vision/geometry/SSLFieldLineSegment.msg
+    msg/vision/geometry/SSLFieldShapeType.msg
+    msg/vision/geometry/SSLFieldSize.msg
+    msg/vision/geometry/SSLGeometryData.msg
+    msg/vision/geometry/SSLGeometryModels.msg
 )
 
 set(ACTION_FILES

@@ -1,0 +1,14 @@
+uint8 undefined
+uint8 center_circle
+uint8 top_touch_line
+uint8 bottom_touch_line
+uint8 left_goal_line
+uint8 right_goal_line
+uint8 halfway_line
+uint8 center_line
+uint8 left_penalty_stretch
+uint8 right_penalty_stretch
+uint8 left_field_left_penalty_stretch
+uint8 left_field_right_penalty_stretch
+uint8 right_field_left_penalty_stretch
+uint8 right_field_right_penalty_stretch

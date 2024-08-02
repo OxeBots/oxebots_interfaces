@@ -1,0 +1,3 @@
+float64 damping_xy_first_hop
+float64 damping_xy_other_hops
+float64 damping_z
