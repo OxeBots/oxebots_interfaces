@@ -64,6 +64,7 @@ set(MSG_FILES
     msg/comms/BallPosition.msg
     msg/comms/RobotPosition.msg
     msg/game/GameData.msg
+    msg/game/BallState.msg
 )
 
 set(ACTION_FILES
