@@ -72,11 +72,11 @@ uint32 victim
 uint32 bot_yellow
 uint32 bot_blue
 
-oxebots_interfaces/Vector2 location
-oxebots_interfaces/Vector2 kick_location
-oxebots_interfaces/Vector2 ball_location
-oxebots_interfaces/Vector2 start
-oxebots_interfaces/Vector2 end
+oxebots_interfaces/Vector2f location
+oxebots_interfaces/Vector2f kick_location
+oxebots_interfaces/Vector2f ball_location
+oxebots_interfaces/Vector2f start
+oxebots_interfaces/Vector2f end
 
 float32 distance
 float32 duration
