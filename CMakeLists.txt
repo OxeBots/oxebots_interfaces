@@ -36,9 +36,6 @@ set(PROTOBUF_FILES
     proto/grSim/ssl_simulation_robot_control.proto
     proto/grSim/ssl_simulation_robot_feedback.proto
     proto/grSim/ssl_simulation_synchronous.proto
-   #proto/grSim/ssl_vision_detection.proto
-   #proto/grSim/ssl_vision_geometry.proto
-   #proto/grSim/ssl_vision_wrapper.proto
 
     # game controller
     proto/ssl-game-controller/ssl_gc_common.proto
@@ -53,15 +50,25 @@ set(PROTOBUF_FILES
 )
 
 set(MSG_FILES
+    # common msgs
+    msg/common/Vector2f.msg
+
     # ssl vision system msgs
     msg/vision/DetectionBall.msg
+    msg/vision/SSLBallModelChipFixedLoss.msg
+    msg/vision/SSLBallModelStraightTwoPhase.msg
+    msg/vision/SSLCameraCalibration.msg
+    msg/vision/SSLCircularArc.msg
+    msg/vision/SSLFieldLineSegment.msg
+    msg/vision/SSLFieldSize.msg
+    msg/vision/SSLGeometryData.msg
+    msg/vision/SSLGeometryModels.msg
 
     # game controller msgs
     msg/game_controller/GameEvent.msg
     msg/game_controller/GameEventProposalGroup.msg
     msg/game_controller/Referee.msg
     msg/game_controller/TeamInfo.msg
-    msg/game_controller/Vector2.msg
 
     # communication module msgs
     msg/comms/RobotCmd.msg
@@ -70,18 +77,6 @@ set(MSG_FILES
     msg/comms/BallPosition.msg
     msg/comms/RobotPosition.msg
     msg/game/GameData.msg
-
-    # geometry msgs
-    msg/vision/geometry/Vector2f.msg
-    msg/vision/geometry/SSLBallModelChipFixedLoss.msg
-    msg/vision/geometry/SSLBallModelStraightTwoPhase.msg
-    msg/vision/geometry/SSLCameraCalibration.msg
-    msg/vision/geometry/SSLCircularArc.msg
-    msg/vision/geometry/SSLFieldLineSegment.msg
-    #msg/vision/geometry/SSLFieldShapeType.msg
-    msg/vision/geometry/SSLFieldSize.msg
-    msg/vision/geometry/SSLGeometryData.msg
-    msg/vision/geometry/SSLGeometryModels.msg
 )
 
 set(ACTION_FILES

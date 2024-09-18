@@ -1,4 +1,3 @@
-
 uint32 camera_id            # Unique identifier for the camera.
 float32 focal_length        # Focal length of the camera lens (in pixels).
 float32 principal_point_x   # X-coordinate of the camera's principal point (optical center) in the image (in pixels).
@@ -16,4 +15,3 @@ float32 derived_camera_world_ty  # Derived translation along the Y-axis from the
 float32 derived_camera_world_tz  # Derived translation along the Z-axis from the camera's position in the world coordinate system (in meters).
 uint32 pixel_image_width     # Width of the image captured by the camera (in pixels).
 uint32 pixel_image_height    # Height of the image captured by the camera (in pixels).
-
