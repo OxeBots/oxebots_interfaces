@@ -92,7 +92,6 @@ bool accepted
 
 string msg
 
-
 builtin_interfaces/Time  time
 
 ### Constants
