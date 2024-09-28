@@ -36,27 +36,39 @@ set(PROTOBUF_FILES
     proto/grSim/ssl_simulation_robot_control.proto
     proto/grSim/ssl_simulation_robot_feedback.proto
     proto/grSim/ssl_simulation_synchronous.proto
-    proto/grSim/ssl_vision_detection.proto
-    proto/grSim/ssl_vision_geometry.proto
-    proto/grSim/ssl_vision_wrapper.proto
 
     # game controller
     proto/ssl-game-controller/ssl_gc_common.proto
     proto/ssl-game-controller/ssl_gc_referee_message.proto
     proto/ssl-game-controller/ssl_gc_game_event.proto
     proto/ssl-game-controller/ssl_gc_geometry.proto
+
+    # ssl-vision
+    proto/ssl-vision/messages_robocup_ssl_detection.proto
+    proto/ssl-vision/messages_robocup_ssl_geometry.proto
+    proto/ssl-vision/messages_robocup_ssl_wrapper.proto
 )
 
 set(MSG_FILES
+    # common msgs
+    msg/common/Vector2f.msg
+
     # ssl vision system msgs
     msg/vision/DetectionBall.msg
+    msg/vision/SSLBallModelChipFixedLoss.msg
+    msg/vision/SSLBallModelStraightTwoPhase.msg
+    msg/vision/SSLCameraCalibration.msg
+    msg/vision/SSLCircularArc.msg
+    msg/vision/SSLFieldLineSegment.msg
+    msg/vision/SSLFieldSize.msg
+    msg/vision/SSLGeometryData.msg
+    msg/vision/SSLGeometryModels.msg
 
     # game controller msgs
     msg/game_controller/GameEvent.msg
     msg/game_controller/GameEventProposalGroup.msg
     msg/game_controller/Referee.msg
     msg/game_controller/TeamInfo.msg
-    msg/game_controller/Vector2.msg
 
     # communication module msgs
     msg/comms/RobotCmd.msg
