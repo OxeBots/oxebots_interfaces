@@ -77,7 +77,6 @@ set(MSG_FILES
     msg/comms/BallPosition.msg
     msg/comms/RobotPosition.msg
     msg/game/GameData.msg
-<<<<<<< HEAD
     msg/game/BallState.msg
 
     # geometry msgs
@@ -91,8 +90,6 @@ set(MSG_FILES
     msg/vision/geometry/SSLFieldSize.msg
     msg/vision/geometry/SSLGeometryData.msg
     msg/vision/geometry/SSLGeometryModels.msg
-=======
->>>>>>> 25b0333 (chore: Update message and geometry related files)
 )
 
 set(ACTION_FILES
