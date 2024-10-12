@@ -78,18 +78,6 @@ set(MSG_FILES
     msg/comms/RobotPosition.msg
     msg/game/GameData.msg
     msg/game/BallState.msg
-
-    # geometry msgs
-    msg/vision/geometry/Vector2f.msg
-    msg/vision/geometry/SSLBallModelChipFixedLoss.msg
-    msg/vision/geometry/SSLBallModelStraightTwoPhase.msg
-    msg/vision/geometry/SSLCameraCalibration.msg
-    msg/vision/geometry/SSLCircularArc.msg
-    msg/vision/geometry/SSLFieldLineSegment.msg
-    #msg/vision/geometry/SSLFieldShapeType.msg
-    msg/vision/geometry/SSLFieldSize.msg
-    msg/vision/geometry/SSLGeometryData.msg
-    msg/vision/geometry/SSLGeometryModels.msg
 )
 
 set(ACTION_FILES
