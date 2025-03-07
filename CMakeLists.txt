@@ -64,6 +64,9 @@ set(MSG_FILES
     msg/comms/RobotGameData.msg
     msg/comms/BallPosition.msg
     msg/comms/RobotPosition.msg
+    msg/comms/BallPredicted.msg
+    msg/comms/RobotPredictedData.msg
+    msg/comms/RobotPredicted.msg
     msg/game/GameData.msg
 )
 
