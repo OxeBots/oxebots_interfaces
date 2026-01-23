@@ -125,6 +125,7 @@ ament_export_dependencies(Protobuf rosidl_default_runtime)
 install(
     DIRECTORY ${CMAKE_BINARY_DIR}
     DESTINATION include
+    FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp" PATTERN "*.pb.h"
 )
 
 install(TARGETS ${PROJECT_NAME}_proto
