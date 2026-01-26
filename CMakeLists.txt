@@ -56,7 +56,7 @@ set(MSG_FILES
     # ssl vision system msgs
     msg/vision/DetectionBall.msg
     msg/vision/SSLBallModelChipFixedLoss.msg
-    msg/vision/SSLBallModelStraightTwoPhase.msg # <-- ERRO CORRIGIDO AQUI (era msgLog)
+    msg/vision/SSLBallModelStraightTwoPhase.msg
     msg/vision/SSLCameraCalibration.msg
     msg/vision/SSLCircularArc.msg
     msg/vision/SSLFieldLineSegment.msg
@@ -76,10 +76,10 @@ set(MSG_FILES
     msg/comms/RobotGameData.msg
     msg/comms/BallPosition.msg
     msg/comms/RobotPosition.msg
-    
+
     # game msgs
     msg/game/GameData.msg
-    msg/game/RobotGoal.msg  # <-- Sua nova linha (está correta)
+    msg/game/RobotGoal.msg
 )
 
 set(ACTION_FILES
