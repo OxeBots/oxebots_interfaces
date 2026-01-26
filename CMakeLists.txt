@@ -76,7 +76,10 @@ set(MSG_FILES
     msg/comms/RobotGameData.msg
     msg/comms/BallPosition.msg
     msg/comms/RobotPosition.msg
+
+    # game msgs
     msg/game/GameData.msg
+    msg/game/RobotGoal.msg
 )
 
 set(ACTION_FILES
@@ -122,6 +125,7 @@ ament_export_dependencies(Protobuf rosidl_default_runtime)
 install(
     DIRECTORY ${CMAKE_BINARY_DIR}
     DESTINATION include
+    FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp" PATTERN "*.pb.h"
 )
 
 install(TARGETS ${PROJECT_NAME}_proto

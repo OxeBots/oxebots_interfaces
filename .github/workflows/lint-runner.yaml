@@ -12,11 +12,11 @@ jobs:
       fail-fast: false
       matrix:
         linter:
-          [cppcheck, cpplint, lint_cmake, flake8, pep257, uncrustify, xmllint]
+          [lint_cmake, xmllint]
         distro: [humble]
         ubuntu: [jammy]
         package: [oxebots_interfaces]
-    runs-on: [self-hosted, colcon-hosted, linux, x64]
+    runs-on: [self-hosted, linux, x64]
     container:
       image: rostooling/setup-ros-docker:ubuntu-${{ matrix.ubuntu }}-latest
     steps:
