@@ -79,7 +79,8 @@ set(MSG_FILES
     
     # game msgs
     msg/game/GameData.msg
-    msg/game/RobotGoal.msg  # <-- Sua nova linha (está correta)
+    msg/game/RobotGoal.msg
+    msg/game/RoleAssignment.msg
 )
 
 set(ACTION_FILES
