@@ -78,6 +78,9 @@ set(MSG_FILES
     msg/comms/RobotPosition.msg
     
     # game msgs
+    msg/comms/BallPredicted.msg
+    msg/comms/RobotPredictedData.msg
+    msg/comms/RobotPredicted.msg
     msg/game/GameData.msg
     msg/game/RobotGoal.msg
     msg/game/RoleAssignment.msg
