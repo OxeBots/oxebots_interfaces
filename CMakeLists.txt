@@ -51,39 +51,39 @@ set(PROTOBUF_FILES
 
 set(MSG_FILES
     # common msgs
-    msg/common/Vector2f.msg
+    msg/Vector2f.msg
 
     # ssl vision system msgs
-    msg/vision/DetectionBall.msg
-    msg/vision/SSLBallModelChipFixedLoss.msg
-    msg/vision/SSLBallModelStraightTwoPhase.msg # <-- ERRO CORRIGIDO AQUI (era msgLog)
-    msg/vision/SSLCameraCalibration.msg
-    msg/vision/SSLCircularArc.msg
-    msg/vision/SSLFieldLineSegment.msg
-    msg/vision/SSLFieldSize.msg
-    msg/vision/SSLGeometryData.msg
-    msg/vision/SSLGeometryModels.msg
+    msg/DetectionBall.msg
+    msg/SSLBallModelChipFixedLoss.msg
+    msg/SSLBallModelStraightTwoPhase.msg
+    msg/SSLCameraCalibration.msg
+    msg/SSLCircularArc.msg
+    msg/SSLFieldLineSegment.msg
+    msg/SSLFieldSize.msg
+    msg/SSLGeometryData.msg
+    msg/SSLGeometryModels.msg
 
     # game controller msgs
-    msg/game_controller/GameEvent.msg
-    msg/game_controller/GameEventProposalGroup.msg
-    msg/game_controller/Referee.msg
-    msg/game_controller/TeamInfo.msg
+    msg/GameEvent.msg
+    msg/GameEventProposalGroup.msg
+    msg/Referee.msg
+    msg/TeamInfo.msg
 
     # communication module msgs
-    msg/comms/RobotCmd.msg
-    msg/comms/RobotCmdData.msg
-    msg/comms/RobotGameData.msg
-    msg/comms/BallPosition.msg
-    msg/comms/RobotPosition.msg
+    msg/RobotCmd.msg
+    msg/RobotCmdData.msg
+    msg/RobotGameData.msg
+    msg/BallPosition.msg
+    msg/RobotPosition.msg
     
     # game msgs
-    msg/comms/BallPredicted.msg
-    msg/comms/RobotPredictedData.msg
-    msg/comms/RobotPredicted.msg
-    msg/game/GameData.msg
-    msg/game/RobotGoal.msg
-    msg/game/RoleAssignment.msg
+    msg/BallPredicted.msg
+    msg/RobotPredictedData.msg
+    msg/RobotPredicted.msg
+    msg/GameData.msg
+    msg/RobotGoal.msg
+    msg/RoleAssignment.msg
 )
 
 set(ACTION_FILES
