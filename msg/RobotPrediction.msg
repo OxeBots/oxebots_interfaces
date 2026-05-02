@@ -1,0 +1,2 @@
+RobotPredictionData[] allies
+RobotPredictionData[] enemies

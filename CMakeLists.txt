@@ -81,6 +81,9 @@ set(MSG_FILES
     msg/BallPredicted.msg
     msg/RobotPredictedData.msg
     msg/RobotPredicted.msg
+    msg/BallPrediction.msg
+    msg/RobotPredictionData.msg
+    msg/RobotPrediction.msg
     msg/GameData.msg
     msg/RobotGoal.msg
     msg/RoleAssignment.msg
