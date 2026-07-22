@@ -87,6 +87,8 @@ set(MSG_FILES
     msg/GameData.msg
     msg/RobotGoal.msg
     msg/RoleAssignment.msg
+    msg/RobotMotionOverride.msg
+    msg/RobotMotionStatus.msg
 )
 
 set(ACTION_FILES
