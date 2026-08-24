@@ -115,6 +115,8 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 add_library(${PROJECT_NAME}_proto SHARED
     ${PROTOBUF_HDRS}
     ${PROTOBUF_SRCS}
+    src/bitproto.c
+    src/ssl_robot_protocol_bp.c
 )
 
 target_link_libraries(${PROJECT_NAME}_proto
@@ -122,7 +124,9 @@ target_link_libraries(${PROJECT_NAME}_proto
 )
 
 target_include_directories(${PROJECT_NAME}_proto
-    INTERFACE
+    PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}>
     $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}>
     $<INSTALL_INTERFACE:include>
 )
@@ -136,6 +140,16 @@ install(
     DIRECTORY ${CMAKE_BINARY_DIR}
     DESTINATION include
     FILES_MATCHING PATTERN "*.h" PATTERN "*.hpp" PATTERN "*.pb.h"
+)
+
+install(
+    DIRECTORY include/
+    DESTINATION include
+)
+
+install(
+    DIRECTORY proto/
+    DESTINATION share/${PROJECT_NAME}/proto
 )
 
 install(TARGETS ${PROJECT_NAME}_proto
