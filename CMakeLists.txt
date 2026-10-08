@@ -90,6 +90,9 @@ set(MSG_FILES
     msg/RoleAssignment.msg
     msg/RobotMotionOverride.msg
     msg/RobotMotionStatus.msg
+    msg/RobotKinematicPose.msg
+    msg/RobotTrajectorySetpointData.msg
+    msg/RobotTrajectorySetpoint.msg
 )
 
 set(ACTION_FILES
