@@ -93,6 +93,7 @@ set(MSG_FILES
     msg/RobotKinematicPose.msg
     msg/RobotTrajectorySetpointData.msg
     msg/RobotTrajectorySetpoint.msg
+    msg/GameState.msg
 )
 
 set(ACTION_FILES
