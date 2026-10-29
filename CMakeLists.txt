@@ -13,6 +13,7 @@ endif()
 set(REQUIRED_PACKAGES
     action_msgs
     ament_cmake
+    builtin_interfaces
     geometry_msgs
     Protobuf
     rosidl_default_generators

@@ -8,3 +8,6 @@ float32 z
 # de uma posição real. game_observer_node já filtra detecções abaixo do limiar mínimo antes de
 # aceitar como posição nova, mas o valor é exposto aqui também para quem quiser refinar.
 float32 confidence
+
+# Instante da última detecção válida da bola (para cálculo de ball_age_ms).
+builtin_interfaces/Time stamp
