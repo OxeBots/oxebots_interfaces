@@ -15,3 +15,6 @@ uint8 PLANNER_STRAIGHT_LINE=2
 # quando sua porta "tolerance" é <= 0 (contrato de "nunca retorna SUCCESS formalmente"), usado por
 # alvos intencionalmente inalcançáveis (ex: ponto de carga além da bola).
 bool disable_arrival_latch false
+
+# Teto opcional de velocidade linear (m/s) para este objetivo (M03). Se <= 0.0, usa o limite padrão do controlador/SafetyGate.
+float32 max_speed 0.0
