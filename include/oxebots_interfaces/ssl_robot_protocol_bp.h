@@ -37,14 +37,17 @@ typedef int16_t AngularVelocityScaled; // 16bit
 // Broadcast address — all robots execute, none reply
 #define ROBOT_ID_BROADCAST 15
 
-// Motion command from base station to a specific robot or broadcast
+// Motion command from base station to a specific robot or broadcast (no reply)
 #define MSG_TYPE_COMMAND 0
 
-// Configuration command (set ID, run calibration, etc.)
+// Configuration command (set ID, run calibration, etc. - no reply)
 #define MSG_TYPE_CONFIG 1
 
 // Telemetry response from robot back to base station
 #define MSG_TYPE_TELEMETRY 2
+
+// Explicit telemetry request from base station to a specific robot
+#define MSG_TYPE_TELEMETRY_REQ 3
 
 // Assign a new robot ID (new ID provided in robot_id field of RobotConfig)
 #define CONFIG_FLAG_SET_ID 1
@@ -132,10 +135,8 @@ struct Pose {
 #define BYTES_LENGTH_ROBOT_COMMAND 30
 
 // ---------------------------------------------------------------------------
-// RobotCommand — base station → robot (unicast or broadcast)
+// RobotCommand — base station → robot (unicast or broadcast, NEVER replies)
 // First byte is msg_type; robot peeks it to demux before full decode.
-// Broadcast (robot_id == ROBOT_ID_BROADCAST): execute, do NOT reply.
-// Unicast: execute and reply with RobotTelemetry.
 // 
 // Size: 5 (Header) + 12 (target_pose) + 12 (vision_pose) + 1 (kick_velocity) = 30 bytes  ✓
 // ---------------------------------------------------------------------------
@@ -166,11 +167,24 @@ struct RobotConfig {
     uint16_t param; // 16bit
 };
 
+// Number of bytes to encode struct RobotTelemetryRequest
+#define BYTES_LENGTH_ROBOT_TELEMETRY_REQUEST 5
+
+// ---------------------------------------------------------------------------
+// RobotTelemetryRequest — base station → robot (unicast only)
+// Requests the target robot to immediately transmit a RobotTelemetry packet.
+// 
+// Size: 5 (Header) = 5 bytes  ✓
+// ---------------------------------------------------------------------------
+struct RobotTelemetryRequest {
+    struct Header header; // 40bit
+};
+
 // Number of bytes to encode struct RobotTelemetry
 #define BYTES_LENGTH_ROBOT_TELEMETRY 22
 
 // ---------------------------------------------------------------------------
-// RobotTelemetry — robot → base station (reply to unicast RobotCommand only)
+// RobotTelemetry — robot → base station (reply to RobotTelemetryRequest only)
 // 
 // Size: 5 (Header) + 12 (robot_pose) + 1 (battery_percentage) + 2 (kicker_voltage) + 2 (error_flags) = 22 bytes  ✓
 // ---------------------------------------------------------------------------
@@ -214,6 +228,13 @@ int DecodeRobotConfig(struct RobotConfig *m, unsigned char *s);
 // Format struct RobotConfig to a json format string.
 int JsonRobotConfig(struct RobotConfig *m, char *s);
 
+// Encode struct RobotTelemetryRequest to given buffer s.
+int EncodeRobotTelemetryRequest(struct RobotTelemetryRequest *m, unsigned char *s);
+// Decode struct RobotTelemetryRequest from given buffer s.
+int DecodeRobotTelemetryRequest(struct RobotTelemetryRequest *m, unsigned char *s);
+// Format struct RobotTelemetryRequest to a json format string.
+int JsonRobotTelemetryRequest(struct RobotTelemetryRequest *m, char *s);
+
 // Encode struct RobotTelemetry to given buffer s.
 int EncodeRobotTelemetry(struct RobotTelemetry *m, unsigned char *s);
 // Decode struct RobotTelemetry from given buffer s.
@@ -247,6 +268,9 @@ void BpXXXJsonFormatRobotCommand(void *data, struct BpJsonFormatContext *ctx);
 
 void BpXXXProcessRobotConfig(void *data, struct BpProcessorContext *ctx);
 void BpXXXJsonFormatRobotConfig(void *data, struct BpJsonFormatContext *ctx);
+
+void BpXXXProcessRobotTelemetryRequest(void *data, struct BpProcessorContext *ctx);
+void BpXXXJsonFormatRobotTelemetryRequest(void *data, struct BpJsonFormatContext *ctx);
 
 void BpXXXProcessRobotTelemetry(void *data, struct BpProcessorContext *ctx);
 void BpXXXJsonFormatRobotTelemetry(void *data, struct BpJsonFormatContext *ctx);
