@@ -8,26 +8,27 @@ Este pacote define as mensagens (`.msg`), serviços (`.srv`) e esquemas de dados
 
 ## 1. Principais Mensagens e Serviços
 
-### 1.1 Percepção e Estado de Jogo (`oxebots_observers`)
-- **`GameData.msg`**: Estado consolidado da partida contendo timestamp, pose da bola (`BallPosition`) e listas de robôs aliados e adversários (`RobotGameData[]`).
-- **`BallPosition.msg`**: Posição 2D da bola em coordenadas globais (milímetros), confiança de detecção e identificador da câmera de captura.
-- **`RobotGameData.msg`**: Identificador do robô, posição `(x, y)` em mm, orientação `theta` (radianos), confiança e câmera de origem.
+### 1.1 Percepção e Estado de Jogo (`oxebots_observers` / `oxebots_strategy`)
+- **`GameData.msg`**: Estado consolidado da partida contendo `std_msgs/Header`, pose da bola (`BallPosition`) e listas de robôs aliados e adversários (`RobotPosition`).
+- **`BallPosition.msg`**: Posição 2D da bola em coordenadas globais (milímetros), confiança de detecção, timestamp e identificador da câmera de captura.
+- **`RobotPosition.msg`** / **`RobotGameData.msg`**: Listas de robôs aliados e adversários (`RobotGameData[]`), contendo identificador do robô, posição `(x, y)` em mm, orientação `theta` (radianos), confiança e câmera de origem.
+- **`GameState.msg`**: Estado regulamentar da partida consolidado pelo `referee_state_node` a partir do Game Controller (`phase`, `restart_ctx`, `we_favored`, `our_goal_positive_x`, `designated_position`, `speed_limit_mps`, `ball_min_distance_mm`, `can_place_ball`, `max_allowed_bots`, `our_goalkeeper_id`, `stale`).
 - **`Referee.msg`**: Comandos e parâmetros da partida decodificados do Game Controller oficial.
 - **`SSLGeometryData.msg`**, **`SSLFieldSize.msg`**: Dimensões oficiais e demarcações das linhas e arcos do campo.
 
 ### 1.2 Predição e Filtro de Kalman (`oxebots_prediction`)
-- **`BallPrediction.msg`** / **`BallPredicted.msg`**: Estado estimado e filtrado da bola contendo posição `(x, y)`, velocidade `(vx, vy)` em mm/s e covariâncias.
-- **`RobotPrediction.msg`** / **`RobotPredicted.msg`**: Estado estimado dos robôs contendo pose, velocidade linear `(vx, vy)` e velocidade angular `w`.
+- **`BallPrediction.msg`** / **`BallPredicted.msg`**: Estado estimado e filtrado da bola contendo posição `(x, y)`, velocidade `(vx, vy)` em mm/s e aceleração `(ax, ay)`.
+- **`RobotPrediction.msg`** / **`RobotPredictionData.msg`** / **`RobotPredicted.msg`**: Estado estimado dos robôs aliados e adversários contendo pose, velocidade linear `(vx, vy)` e velocidade angular `vorientation`.
 
 ### 1.3 Estratégia e Movimento (`oxebots_strategy`)
-- **`RobotGoal.msg`**: Alvo cinemático publicado pelas árvores de comportamento para cada robô (ponto de destino `(x, y)`, orientação desejada, velocidade máxima, se deve desviar da bola ou de robôs).
-- **`RoleAssignment.msg`**: Distribuição dinâmica de papéis (`GOALKEEPER`, `ATTACKER`, `DEFENDER`) calculada pelo `role_assigner_node`.
-- **`RobotMotionOverride.msg`**: Permite que nós de estratégia sobrescrevam o controle padrão (ex: chutes de precisão ou manobras especiais).
-- **`RobotMotionStatus.msg`**: Feedback do controlador de trajetória informando se o robô atingiu o alvo, tempo restante e erro.
-- **`RobotTrajectorySetpoint.msg`**: Ponto de referência intermediário gerado pelo `trajectory_setpoint_node` para envio via rádio.
+- **`RobotGoal.msg`**: Alvo cinemático publicado pelas árvores de comportamento para cada robô (`robot_id`, `geometry_msgs/PoseStamped pose` em metros, `planner_type` D\*/A\*/Straight Line, `disable_arrival_latch` e teto opcional `max_speed`).
+- **`RoleAssignment.msg`**: Distribuição dinâmica de papéis (`goalkeeper_id`, `attacker_id`, `defender_id`) calculada pelo `role_assigner_node`.
+- **`RobotMotionOverride.msg`**: Permite que nós de estratégia sobrescrevam temporariamente o controle padrão (ex.: parada, alinhamento fino à bola ou chute com TTL de 200 ms).
+- **`RobotMotionStatus.msg`**: Feedback do controlador de trajetória informando se o robô atingiu o alvo, distância e erro angular.
+- **`RobotTrajectorySetpoint.msg`** / **`RobotTrajectorySetpointData.msg`**: Lote de pontos de referência intermediários gerados pelo `trajectory_setpoint_node` para envio via rádio no modo `point`.
 
 ### 1.4 Controle e Hardware (`oxebots_comms`)
-- **`RobotCmd.msg`** / **`RobotCmdData.msg`**: Comandos de controle em velocidade local/global ou modo trajetória com flags de chute e drible.
+- **`RobotCmd.msg`** / **`RobotCmdData.msg`**: Comandos de controle contendo velocidades (`x_velocity`, `y_velocity`, `angular_velocity`), velocidade de chute (`kick_speed`) e drible para cada robô.
 - **`RobotTelemetry.msg`**: Telemetria recebida do robô físico via rádio (tensões de bateria, velocidades medidas, status de sensores).
 
 ### 1.5 Serviços
