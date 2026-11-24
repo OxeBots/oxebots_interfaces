@@ -49,6 +49,12 @@ typedef int16_t AngularVelocityScaled; // 16bit
 // Explicit telemetry request from base station to a specific robot
 #define MSG_TYPE_TELEMETRY_REQ 3
 
+// payload gathering multiple robots cmds
+#define MSG_TYPE_TEAM_VEL_CMD 4
+
+// confir max robots
+#define TEAM_VEL_CMD_MAX_ROBOTS 3
+
 // Assign a new robot ID (new ID provided in robot_id field of RobotConfig)
 #define CONFIG_FLAG_SET_ID 1
 
@@ -200,6 +206,23 @@ struct RobotTelemetry {
     uint16_t error_flags; // 16bit
 };
 
+// Number of bytes to encode struct SingleRobotVelCmd
+#define BYTES_LENGTH_SINGLE_ROBOT_VEL_CMD 6
+
+struct SingleRobotVelCmd {
+    uint8_t robot_id; // 4bit
+    // 0.5 bytes
+    int16_t vx; // 12bit
+    // 1.5 bytes
+    int16_t vy; // 12bit
+    // 1.5 bytes
+    int16_t vw; // 11bit
+    // 
+    uint8_t kick_velocity; // 7bit
+    // 
+    uint8_t flags; // 2bit
+};
+
 // Encode struct Header to given buffer s.
 int EncodeHeader(struct Header *m, unsigned char *s);
 // Decode struct Header from given buffer s.
@@ -242,6 +265,13 @@ int DecodeRobotTelemetry(struct RobotTelemetry *m, unsigned char *s);
 // Format struct RobotTelemetry to a json format string.
 int JsonRobotTelemetry(struct RobotTelemetry *m, char *s);
 
+// Encode struct SingleRobotVelCmd to given buffer s.
+int EncodeSingleRobotVelCmd(struct SingleRobotVelCmd *m, unsigned char *s);
+// Decode struct SingleRobotVelCmd from given buffer s.
+int DecodeSingleRobotVelCmd(struct SingleRobotVelCmd *m, unsigned char *s);
+// Format struct SingleRobotVelCmd to a json format string.
+int JsonSingleRobotVelCmd(struct SingleRobotVelCmd *m, char *s);
+
 void BpXXXProcessTimestamp(void *data, struct BpProcessorContext *ctx);
 void BpXXXJsonFormatTimestamp(void *data, struct BpJsonFormatContext *ctx);
 
@@ -274,6 +304,9 @@ void BpXXXJsonFormatRobotTelemetryRequest(void *data, struct BpJsonFormatContext
 
 void BpXXXProcessRobotTelemetry(void *data, struct BpProcessorContext *ctx);
 void BpXXXJsonFormatRobotTelemetry(void *data, struct BpJsonFormatContext *ctx);
+
+void BpXXXProcessSingleRobotVelCmd(void *data, struct BpProcessorContext *ctx);
+void BpXXXJsonFormatSingleRobotVelCmd(void *data, struct BpJsonFormatContext *ctx);
 
 #if defined(__cplusplus)
 }

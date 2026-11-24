@@ -279,7 +279,7 @@ void BpXXXJsonFormatRobotTelemetry(void *data, struct BpJsonFormatContext *ctx) 
     BpJsonFormatMessage(&descriptor, ctx, data);
 }
 
-int EncodeRobotTelemetry(struct RobotTelemetry *m, unsigned char *s) {
+int     botTelemetry(struct RobotTelemetry *m, unsigned char *s) {
     struct BpProcessorContext ctx = BpProcessorContext(true, s);
     BpXXXProcessRobotTelemetry((void *)m, &ctx);
     return 0;
@@ -294,5 +294,48 @@ int DecodeRobotTelemetry(struct RobotTelemetry *m, unsigned char *s) {
 int JsonRobotTelemetry(struct RobotTelemetry *m, char *s) {
     struct BpJsonFormatContext ctx = BpJsonFormatContext(s);
     BpXXXJsonFormatRobotTelemetry((void *)m, &ctx);
+    return ctx.n;
+}
+
+void BpFieldDescriptorsInitSingleRobotVelCmd(struct SingleRobotVelCmd *m, struct BpMessageFieldDescriptor *fds) {
+    fds[0] = BpMessageFieldDescriptor((void *)&(m->robot_id), BpUint(4, sizeof(uint8_t)), "robot_id");
+    fds[1] = BpMessageFieldDescriptor((void *)&(m->vx), BpInt(12, sizeof(int16_t)), "vx");
+    fds[2] = BpMessageFieldDescriptor((void *)&(m->vy), BpInt(12, sizeof(int16_t)), "vy");
+    fds[3] = BpMessageFieldDescriptor((void *)&(m->vw), BpInt(11, sizeof(int16_t)), "vw");
+    fds[4] = BpMessageFieldDescriptor((void *)&(m->kick_velocity), BpUint(7, sizeof(uint8_t)), "kick_velocity");
+    fds[5] = BpMessageFieldDescriptor((void *)&(m->flags), BpUint(2, sizeof(uint8_t)), "flags");
+}
+
+void BpXXXProcessSingleRobotVelCmd(void *data, struct BpProcessorContext *ctx) {
+    struct SingleRobotVelCmd *m = (struct SingleRobotVelCmd *)(data);
+    struct BpMessageFieldDescriptor field_descriptors[6];
+    BpFieldDescriptorsInitSingleRobotVelCmd(m, field_descriptors);
+    struct BpMessageDescriptor descriptor = BpMessageDescriptor(false, 6, 48, field_descriptors);
+    BpEndecodeMessage(&descriptor, ctx, data);
+}
+
+void BpXXXJsonFormatSingleRobotVelCmd(void *data, struct BpJsonFormatContext *ctx) {
+    struct SingleRobotVelCmd *m = (struct SingleRobotVelCmd *)(data);
+    struct BpMessageFieldDescriptor field_descriptors[6];
+    BpFieldDescriptorsInitSingleRobotVelCmd(m, field_descriptors);
+    struct BpMessageDescriptor descriptor = BpMessageDescriptor(false, 6, 48, field_descriptors);
+    BpJsonFormatMessage(&descriptor, ctx, data);
+}
+
+int EncodeSingleRobotVelCmd(struct SingleRobotVelCmd *m, unsigned char *s) {
+    struct BpProcessorContext ctx = BpProcessorContext(true, s);
+    BpXXXProcessSingleRobotVelCmd((void *)m, &ctx);
+    return 0;
+}
+
+int DecodeSingleRobotVelCmd(struct SingleRobotVelCmd *m, unsigned char *s) {
+    struct BpProcessorContext ctx = BpProcessorContext(false, s);
+    BpXXXProcessSingleRobotVelCmd((void *)m, &ctx);
+    return 0;
+}
+
+int JsonSingleRobotVelCmd(struct SingleRobotVelCmd *m, char *s) {
+    struct BpJsonFormatContext ctx = BpJsonFormatContext(s);
+    BpXXXJsonFormatSingleRobotVelCmd((void *)m, &ctx);
     return ctx.n;
 }
