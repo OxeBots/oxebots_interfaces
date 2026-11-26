@@ -122,6 +122,7 @@ add_library(${PROJECT_NAME}_proto SHARED
     ${PROTOBUF_SRCS}
     src/bitproto.c
     src/ssl_robot_protocol_bp.c
+    src/base_station_protocol_bp.c
 )
 
 target_link_libraries(${PROJECT_NAME}_proto

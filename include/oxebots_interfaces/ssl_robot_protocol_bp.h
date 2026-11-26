@@ -70,6 +70,9 @@ typedef int16_t AngularVelocityScaled; // 16bit
 // Full NVS erase — all namespaces, all keys
 #define CONFIG_FLAG_FACTORY_RESET 16
 
+// Switch robot RF channel (new channel 0..125 in RobotConfig.param, persisted to NVS)
+#define CONFIG_FLAG_SET_CHANNEL 32
+
 // Bit 0:  Communication loss with base station
 #define ERROR_COMM_LOSS 1
 

@@ -279,7 +279,7 @@ void BpXXXJsonFormatRobotTelemetry(void *data, struct BpJsonFormatContext *ctx) 
     BpJsonFormatMessage(&descriptor, ctx, data);
 }
 
-int     botTelemetry(struct RobotTelemetry *m, unsigned char *s) {
+int EncodeRobotTelemetry(struct RobotTelemetry *m, unsigned char *s) {
     struct BpProcessorContext ctx = BpProcessorContext(true, s);
     BpXXXProcessRobotTelemetry((void *)m, &ctx);
     return 0;
