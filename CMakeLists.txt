@@ -78,6 +78,7 @@ set(MSG_FILES
     msg/BallPosition.msg
     msg/RobotPosition.msg
     msg/RobotTelemetry.msg
+    msg/RadioLinkStats.msg
     
     # game msgs
     msg/BallPredicted.msg
@@ -102,6 +103,9 @@ set(ACTION_FILES
 
 set(SERVICE_FILES
     srv/Substitute.srv
+    srv/ScanSpectrum.srv
+    srv/MigrateChannel.srv
+    srv/SetRobotId.srv
 )
 
 protobuf_generate_cpp(

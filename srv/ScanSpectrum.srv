@@ -1,0 +1,18 @@
+uint8 start_channel
+uint8 end_channel
+uint8 samples_per_channel
+uint8 min_separation
+uint8 optimal_separation
+---
+bool success
+uint8 current_tx_channel
+uint8 current_rx_channel
+uint8 best_tx_channel
+uint8 best_rx_channel
+uint8 pair_separation_mhz
+uint8 current_tx_busy_pct
+uint8 current_rx_busy_pct
+uint8 best_tx_busy_pct
+uint8 best_rx_busy_pct
+uint8[126] busy_pct
+string message

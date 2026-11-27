@@ -1,0 +1,13 @@
+uint8 target_tx_channel
+uint8 target_rx_channel
+uint8 max_attempts
+bool persist_nvs
+uint8[] explicit_robot_ids
+---
+bool accepted
+bool all_confirmed
+uint8 active_tx_channel
+uint8 active_rx_channel
+uint8[] confirmed_ids
+uint8[] unconfirmed_ids
+string message
