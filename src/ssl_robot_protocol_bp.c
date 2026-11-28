@@ -261,21 +261,23 @@ void BpFieldDescriptorsInitRobotTelemetry(struct RobotTelemetry *m, struct BpMes
     fds[2] = BpMessageFieldDescriptor((void *)&(m->battery_percentage), BpUint(8, sizeof(uint8_t)), "battery_percentage");
     fds[3] = BpMessageFieldDescriptor((void *)&(m->kicker_voltage), BpUint(16, sizeof(uint16_t)), "kicker_voltage");
     fds[4] = BpMessageFieldDescriptor((void *)&(m->error_flags), BpUint(16, sizeof(uint16_t)), "error_flags");
+    fds[5] = BpMessageFieldDescriptor((void *)&(m->sensor_flags), BpUint(8, sizeof(uint8_t)), "sensor_flags");
+    fds[6] = BpMessageFieldDescriptor((void *)&(m->ball_distance_mm), BpInt(16, sizeof(int16_t)), "ball_distance_mm");
 }
 
 void BpXXXProcessRobotTelemetry(void *data, struct BpProcessorContext *ctx) {
     struct RobotTelemetry *m = (struct RobotTelemetry *)(data);
-    struct BpMessageFieldDescriptor field_descriptors[5];
+    struct BpMessageFieldDescriptor field_descriptors[7];
     BpFieldDescriptorsInitRobotTelemetry(m, field_descriptors);
-    struct BpMessageDescriptor descriptor = BpMessageDescriptor(false, 5, 176, field_descriptors);
+    struct BpMessageDescriptor descriptor = BpMessageDescriptor(false, 7, 200, field_descriptors);
     BpEndecodeMessage(&descriptor, ctx, data);
 }
 
 void BpXXXJsonFormatRobotTelemetry(void *data, struct BpJsonFormatContext *ctx) {
     struct RobotTelemetry *m = (struct RobotTelemetry *)(data);
-    struct BpMessageFieldDescriptor field_descriptors[5];
+    struct BpMessageFieldDescriptor field_descriptors[7];
     BpFieldDescriptorsInitRobotTelemetry(m, field_descriptors);
-    struct BpMessageDescriptor descriptor = BpMessageDescriptor(false, 5, 176, field_descriptors);
+    struct BpMessageDescriptor descriptor = BpMessageDescriptor(false, 7, 200, field_descriptors);
     BpJsonFormatMessage(&descriptor, ctx, data);
 }
 

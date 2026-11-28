@@ -52,7 +52,7 @@ typedef int16_t AngularVelocityScaled; // 16bit
 // payload gathering multiple robots cmds
 #define MSG_TYPE_TEAM_VEL_CMD 4
 
-// confir max robots
+// config max robots
 #define TEAM_VEL_CMD_MAX_ROBOTS 3
 
 // Assign a new robot ID (new ID provided in robot_id field of RobotConfig)
@@ -70,8 +70,17 @@ typedef int16_t AngularVelocityScaled; // 16bit
 // Full NVS erase — all namespaces, all keys
 #define CONFIG_FLAG_FACTORY_RESET 16
 
-// Switch robot RF channel (new channel 0..125 in RobotConfig.param, persisted to NVS)
+// Switch robot RF channel(s), persisted to NVS.
+// Encoding of RobotConfig.param (uint16):
+// - Legacy same-channel (bit 15 == 0): downlink = uplink = (param & 0x7F)
+// - Full-duplex split-channel (bit 15 == 1):
+// downlink (robot RX / base TX) = (param & 0x7F)
+// uplink   (robot TX / base RX) = ((param >> 8) & 0x7F)
 #define CONFIG_FLAG_SET_CHANNEL 32
+
+// Set ToF ball-in-kicker trigger distance threshold in millimeters (persisted to NVS).
+// RobotConfig.param carries the raw ToF distance threshold in mm (20..300 mm; default 60 mm).
+#define CONFIG_FLAG_SET_TOF_THRESHOLD 64
 
 // Bit 0:  Communication loss with base station
 #define ERROR_COMM_LOSS 1
@@ -189,13 +198,23 @@ struct RobotTelemetryRequest {
     struct Header header; // 40bit
 };
 
+// Bit 0: VL53L5CX Time-of-Flight sensor producing fresh frames
+#define SENSOR_FLAG_TOF_ONLINE 1
+
+// Bit 1: Ball visible in the ToF approach/guidance zone
+#define SENSOR_FLAG_BALL_VISIBLE 2
+
+// Bit 2: Ball confirmed in the kicker mouth (ready to kick)
+#define SENSOR_FLAG_BALL_IN_KICKER 4
+
 // Number of bytes to encode struct RobotTelemetry
-#define BYTES_LENGTH_ROBOT_TELEMETRY 22
+#define BYTES_LENGTH_ROBOT_TELEMETRY 25
 
 // ---------------------------------------------------------------------------
 // RobotTelemetry — robot → base station (reply to RobotTelemetryRequest only)
 // 
-// Size: 5 (Header) + 12 (robot_pose) + 1 (battery_percentage) + 2 (kicker_voltage) + 2 (error_flags) = 22 bytes  ✓
+// Size: 5 (Header) + 12 (robot_pose) + 1 (battery_percentage) + 2 (kicker_voltage)
+// + 2 (error_flags) + 1 (sensor_flags) + 2 (ball_distance_mm) = 25 bytes  ✓
 // ---------------------------------------------------------------------------
 struct RobotTelemetry {
     struct Header header; // 40bit
@@ -207,6 +226,10 @@ struct RobotTelemetry {
     uint16_t kicker_voltage; // 16bit
     // Voltage in 0.01 V units (e.g. 1650 = 16.50 V)
     uint16_t error_flags; // 16bit
+    // Bitmask of ERROR_* constants
+    uint8_t sensor_flags; // 8bit
+    // Bitmask of SENSOR_FLAG_* constants
+    int16_t ball_distance_mm; // 16bit
 };
 
 // Number of bytes to encode struct SingleRobotVelCmd

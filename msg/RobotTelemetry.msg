@@ -20,3 +20,9 @@ float32 kicker_voltage
 # 1: Comm loss | 2: IMU fail | 4: TOF fail | 8: Batt under | 16: Batt over | 32: Kicker no charge ...
 # Verificar tudo no ssl_robot_protocol_bp.h (pode estar em comms ou interface)
 uint16 error_flags
+
+# Sensor Time-of-Flight (VL53L5CX) para percepção e disparo do chute
+bool tof_online
+bool ball_visible
+bool ball_detected
+int16 ball_distance_mm

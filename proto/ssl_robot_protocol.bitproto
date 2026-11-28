@@ -85,6 +85,10 @@ const CONFIG_FLAG_FACTORY_RESET = 16;
 //       uplink   (robot TX / base RX) = ((param >> 8) & 0x7F)
 const CONFIG_FLAG_SET_CHANNEL = 32;
 
+// Set ToF ball-in-kicker trigger distance threshold in millimeters (persisted to NVS).
+// RobotConfig.param carries the raw ToF distance threshold in mm (20..300 mm; default 60 mm).
+const CONFIG_FLAG_SET_TOF_THRESHOLD = 64;
+
 // ---------------------------------------------------------------------------
 // Error flag constants (bitmask for error_flags field in RobotTelemetry)
 // ---------------------------------------------------------------------------
@@ -174,9 +178,21 @@ message RobotTelemetryRequest {
 }
 
 // ---------------------------------------------------------------------------
+// Sensor status flag constants (bitmask for sensor_flags in RobotTelemetry)
+// ---------------------------------------------------------------------------
+
+// Bit 0: VL53L5CX Time-of-Flight sensor producing fresh frames
+const SENSOR_FLAG_TOF_ONLINE     = 1;
+// Bit 1: Ball visible in the ToF approach/guidance zone
+const SENSOR_FLAG_BALL_VISIBLE   = 2;
+// Bit 2: Ball confirmed in the kicker mouth (ready to kick)
+const SENSOR_FLAG_BALL_IN_KICKER = 4;
+
+// ---------------------------------------------------------------------------
 // RobotTelemetry — robot → base station (reply to RobotTelemetryRequest only)
 //
-// Size: 5 (Header) + 12 (robot_pose) + 1 (battery_percentage) + 2 (kicker_voltage) + 2 (error_flags) = 22 bytes  ✓
+// Size: 5 (Header) + 12 (robot_pose) + 1 (battery_percentage) + 2 (kicker_voltage)
+//       + 2 (error_flags) + 1 (sensor_flags) + 2 (ball_distance_mm) = 25 bytes  ✓
 // ---------------------------------------------------------------------------
 message RobotTelemetry {
     Header header              = 1;  // Message header (msg_type, robot_id, timestamp)
@@ -184,6 +200,8 @@ message RobotTelemetry {
     uint8  battery_percentage  = 3;  // 0–100 %
     uint16 kicker_voltage      = 4;  // Voltage in 0.01 V units (e.g. 1650 = 16.50 V)
     uint16 error_flags         = 5;  // Bitmask of ERROR_* constants
+    uint8  sensor_flags        = 6;  // Bitmask of SENSOR_FLAG_* constants
+    int16  ball_distance_mm    = 7;  // Distance ahead of kicker in mm (-1 when not visible)
 }
 
 // new msg to high freq comm
